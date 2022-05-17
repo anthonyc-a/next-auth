@@ -11,29 +11,39 @@ const Home = () => {
   const toggleShowA = () => setShowA(!showA);
 
   return (
-    <Container className="p-2">
-      <ButtonGroup className="me-4">
-        <Button className="me-2 rounded" onClick={toggleShowA}>
-          Show account details
-        </Button>
+    <Container className="d-flex flex-column align-items-center p-4">
+      <ButtonGroup>
         <Button
-          className="me-2 rounded"
-          onClick={(e) => {
-            e.preventDefault();
-            signIn();
+          className={`me-2 rounded ${showA && "disabled"}`}
+          onClick={() => {
+            setShowA(true);
           }}
         >
-          Sign in
+          Account details
         </Button>
-        <Button
-        className="rounded"
-          onClick={(e) => {
-            e.preventDefault();
-            signOut();
-          }}
-        >
-          Sign out
-        </Button>
+        {!session && (
+          <Button
+            className="me-2 rounded"
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            Sign in
+          </Button>
+        )}
+
+        {session && (
+          <Button
+            className="me-2 rounded"
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          >
+            Sign out
+          </Button>
+        )}
       </ButtonGroup>
 
       <Toast show={showA} onClose={toggleShowA}>
@@ -41,12 +51,14 @@ const Home = () => {
           <img
             src={session?.user?.image!}
             alt="avatar"
-            className="rounded me-2"
+            className="rounded me-2 w-25"
           />
           <strong className="me-auto">{session?.user?.name!}</strong>
           <small>11 mins ago</small>
         </Toast.Header>
-        <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+        <Toast.Body className="d-flex justify-content-center">
+          {session?.user?.email}
+        </Toast.Body>
       </Toast>
 
       <img />
