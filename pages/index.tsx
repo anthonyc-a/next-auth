@@ -7,11 +7,10 @@ const Home = () => {
   const { data: session } = useSession();
 
   const [showA, setShowA] = useState(true);
-
   const toggleShowA = () => setShowA(!showA);
 
   return (
-    <Container className="d-flex flex-column align-items-center p-4">
+    <Container className="d-flex flex-column align-items-center p-4 vh-100">
       <ButtonGroup>
         <Button
           className={`me-2 rounded ${showA && "disabled"}`}
@@ -46,7 +45,11 @@ const Home = () => {
         )}
       </ButtonGroup>
 
-      <Toast show={showA} onClose={toggleShowA}>
+      <Toast
+        show={showA}
+        onClose={toggleShowA}
+        className="position-fixed bottom-0 end-0 mb-2 me-2"
+      >
         <Toast.Header>
           <img
             src={session?.user?.image!}
@@ -61,7 +64,20 @@ const Home = () => {
         </Toast.Body>
       </Toast>
 
-      <img />
+      <div className="jumbotron position-absolute top-50 start-50 translate-middle">
+        <h1 className="display-4">Hello {session?.user?.name!}</h1>
+        <p className="lead">
+          This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.
+        </p>
+        <hr className="my-4" />
+      
+        <p className="lead">
+          <a className="btn btn-primary btn-lg" href="#" role="button">
+            Learn more
+          </a>
+        </p>
+      </div>
     </Container>
   );
 };
