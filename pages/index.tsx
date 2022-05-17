@@ -18,7 +18,7 @@ const Home = () => {
             setShowA(true);
           }}
         >
-          Account details
+          Account details m8
         </Button>
         {!session && (
           <Button
