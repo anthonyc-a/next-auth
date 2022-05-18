@@ -40,7 +40,6 @@ export default NextAuth({
           client.close();
           return {
             name: user.username,
-            username: user.username,
             email: user.email,
           };
         } catch (error: any) {
