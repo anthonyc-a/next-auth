@@ -39,7 +39,7 @@ export default NextAuth({
 
           client.close();
           return {
-            name: user.name,
+            name: user.username,
             username: user.username,
             email: user.email,
           };
