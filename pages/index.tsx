@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "react-bootstrap/Button";
 import { ButtonGroup, Container, Toast } from "react-bootstrap";
 
 const Home = () => {
   const { data: session } = useSession();
+
+  console.log(session?.user)
+
+  const router = useRouter();
 
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
@@ -18,7 +23,7 @@ const Home = () => {
             setShowA(true);
           }}
         >
-          Account detail
+          Account details
         </Button>
         {!session && (
           <Button
@@ -29,6 +34,18 @@ const Home = () => {
             }}
           >
             Sign in
+          </Button>
+        )}
+
+        {!session && (
+          <Button
+            className="me-2 rounded"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("signup");
+            }}
+          >
+            Sign up
           </Button>
         )}
 
@@ -66,17 +83,6 @@ const Home = () => {
 
       <div className="jumbotron position-absolute top-50 start-50 translate-middle">
         <h1 className="display-4">Hello {session?.user?.name!}</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr className="my-4" />
-      
-        <p className="lead">
-          <a className="btn btn-primary btn-lg" href="#" role="button">
-            Learn more
-          </a>
-        </p>
       </div>
     </Container>
   );

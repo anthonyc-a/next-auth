@@ -17,7 +17,7 @@ export const verifyPassword = async (
   try {
     const isValid = await compare(password, hashedPassword);
     return isValid;
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
