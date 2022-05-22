@@ -7,7 +7,7 @@ import { ButtonGroup, Container, Toast } from "react-bootstrap";
 const Home = () => {
   const { data: session } = useSession();
 
-  console.log(session?.user)
+  console.log(session?.user);
 
   const router = useRouter();
 
@@ -30,7 +30,7 @@ const Home = () => {
             className="me-2 rounded"
             onClick={(e) => {
               e.preventDefault();
-              signIn();
+              router.push("/signin");
             }}
           >
             Sign in

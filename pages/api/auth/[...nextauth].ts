@@ -38,6 +38,7 @@ export default NextAuth({
           if (!isPasswordValid) throw new Error("Password is not valid");
 
           client.close();
+
           return {
             name: user.username,
             email: user.email,
@@ -69,6 +70,9 @@ export default NextAuth({
       session.accessToken = token.accessToken;
       return session;
     },
+  },
+  pages: {
+    signIn: "/auth/signin",
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
