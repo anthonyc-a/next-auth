@@ -100,6 +100,7 @@ const SignIn = () => {
           <Buttons type="submit" />
         </form>
         <Buttons type="google" />
+        <Buttons type="github" />
       </div>
     </Container>
   );

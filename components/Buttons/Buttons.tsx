@@ -18,11 +18,27 @@ const Buttons = ({ type }: { type: string }) => {
   if (type === "google")
     return (
       <button
-        className="btn btn-secondary mt-4"
+        className="btn btn-secondary mt-5"
         onClick={() => [signIn("google"), buttonLoad()]}
       >
         {!isLoading ? (
           <>Sign in with Google</>
+        ) : (
+          <>
+            <span className="loader-sm"></span>
+          </>
+        )}
+      </button>
+    );
+
+  if (type === "github")
+    return (
+      <button
+        className="btn btn-secondary mt-3"
+        onClick={() => [signIn("github"), buttonLoad()]}
+      >
+        {!isLoading ? (
+          <>Sign in with GitHub</>
         ) : (
           <>
             <span className="loader-sm"></span>

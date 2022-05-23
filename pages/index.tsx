@@ -61,22 +61,24 @@ const Home = () => {
         )}
       </ButtonGroup>
 
-      <Toast
-        show={showA}
-        onClose={toggleShowA}
-        className="position-fixed bottom-0 end-0 mb-2 me-2"
-      >
-        <Toast.Header>
-          <img
-            src={session?.user?.image!}
-            alt="avatar"
-            className="rounded me-2 w-25"
-          />
-          <strong className="me-auto">{session?.user?.name!}</strong>
-          <small>11 mins ago</small>
-        </Toast.Header>
-        <Toast.Body>{session?.user?.email}</Toast.Body>
-      </Toast>
+      {session && (
+        <Toast
+          show={showA}
+          onClose={toggleShowA}
+          className="position-fixed bottom-0 end-0 mb-2 me-2"
+        >
+          <Toast.Header>
+            <img
+              src={session?.user?.image!}
+              alt="avatar"
+              className="rounded me-2 w-25"
+            />
+            <strong className="me-auto">{session?.user?.name!}</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>{session?.user?.email}</Toast.Body>
+        </Toast>
+      )}
 
       <div className="jumbotron position-absolute top-50 start-50 translate-middle">
         <h1 className="display-4">Hello {session?.user?.name!}</h1>
