@@ -58,7 +58,7 @@ const Account = () => {
       if (!res.ok) throw new Error(data.message || "Something went wrong");
       console.log(data.message);
 
-      alert("Sign in again to see changes");
+      alert("Changes saved! Sign in again to update account");
       signOut();
     } catch (error) {
       console.log(error);
