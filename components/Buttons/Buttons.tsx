@@ -46,6 +46,8 @@ const Buttons = ({ type }: { type: string }) => {
         )}
       </button>
     );
+
+  return <></>;
 };
 
 export default Buttons;
