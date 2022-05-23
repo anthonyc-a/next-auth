@@ -13,14 +13,17 @@ const Home = () => {
   return (
     <Container className="d-flex flex-column align-items-center p-4 vh-100">
       <ButtonGroup>
-        <Button
-          className={`me-2 rounded ${showA && "disabled"}`}
-          onClick={() => {
-            setShowA(true);
-          }}
-        >
-          Account details
-        </Button>
+        {session && (
+          <Button
+            className={`me-2 rounded ${showA && "disabled"}`}
+            onClick={() => {
+              setShowA(true);
+            }}
+          >
+            Account details
+          </Button>
+        )}
+
         {!session && (
           <Button
             className="me-2 rounded"
@@ -72,9 +75,7 @@ const Home = () => {
           <strong className="me-auto">{session?.user?.name!}</strong>
           <small>11 mins ago</small>
         </Toast.Header>
-        <Toast.Body className="d-flex justify-content-center">
-          {session?.user?.email}
-        </Toast.Body>
+        <Toast.Body>{session?.user?.email}</Toast.Body>
       </Toast>
 
       <div className="jumbotron position-absolute top-50 start-50 translate-middle">

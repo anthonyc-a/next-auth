@@ -153,7 +153,7 @@ const SignUp = () => {
               id="exampleInputPassword1"
             />
           </div>
-          <div className="mb-3 form-check">
+          <div className="mb-3 form-check mt-4">
             <input
               onClick={() => {
                 handleClick();
@@ -169,8 +169,8 @@ const SignUp = () => {
               This is required
             </label>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
+          <button type="submit" className="btn btn-primary w-100 mt-2">
+            Create an account
           </button>
         </form>
       </div>

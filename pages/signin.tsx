@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Container } from "react-bootstrap";
+import Buttons from "../components/Buttons/Buttons";
 
 const SignIn = () => {
   const { data: session } = useSession();
@@ -96,18 +97,9 @@ const SignIn = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-100 mt-2">
-            Sign in
-          </button>
+          <Buttons type="submit" />
         </form>
-          <button
-            className="btn btn-secondary mt-4"
-            onClick={() => {
-              signIn("google");
-            }}
-          >
-            Sign in with Google
-          </button>
+        <Buttons type="google" />
       </div>
     </Container>
   );
