@@ -29,11 +29,12 @@ const Account = () => {
     first: session?.user?.first!,
     last: session?.user?.last!,
     age: session?.user?.age!,
+    org: session?.user?.org!,
   });
 
   console.log(userCredentials);
 
-  const { first, last, age } = userCredentials;
+  const { first, last, age, org } = userCredentials;
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -47,6 +48,7 @@ const Account = () => {
           first: first,
           last: last,
           age: age,
+          org: org,
           account: email,
         }),
       });
@@ -77,68 +79,89 @@ const Account = () => {
   if (session)
     return (
       <Container className="d-flex flex-column align-items-center p-4 vh-100">
-        <h1>Account details</h1>
+        <h2>Account details</h2>
         <Container className="mt-5">
           <form onSubmit={handleSubmit}>
-            <ul>
-              <li>
-                First name:{" "}
+            <li>
+              First name:{" "}
+              <input
+                type="text"
+                name="first"
+                value={first}
+                defaultValue={
+                  session?.user?.name
+                    ? session?.user?.name!
+                    : session?.user?.first!
+                }
+                onChange={handleChange}
+              />
+            </li>
+            <li>
+              Last name:{" "}
+              {session?.user?.last ? (
                 <input
                   type="text"
-                  name="first"
-                  value={first}
-                  defaultValue={
-                    session?.user?.name
-                      ? session?.user?.name!
-                      : session?.user?.first!
-                  }
+                  name="last"
+                  value={last}
+                  defaultValue={session?.user?.last}
                   onChange={handleChange}
                 />
-              </li>
-              <li>
-                Last name:{" "}
-                {session?.user?.last ? (
+              ) : (
+                <>
                   <input
                     type="text"
-                    name="last"
                     value={last}
-                    defaultValue={session?.user?.last}
+                    name="last"
                     onChange={handleChange}
                   />
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      value={last}
-                      name="last"
-                      onChange={handleChange}
-                    />
-                  </>
-                )}
-              </li>
-              <li>
-                Age:{" "}
-                {session?.user?.age ? (
+                </>
+              )}
+            </li>
+            <li>
+              Age:{" "}
+              {session?.user?.age ? (
+                <input
+                  type="text"
+                  name="age"
+                  value={age}
+                  defaultValue={session?.user?.age}
+                  onChange={handleChange}
+                />
+              ) : (
+                <>
                   <input
                     type="text"
-                    name="age"
                     value={age}
-                    defaultValue={session?.user?.age}
+                    name="age"
                     onChange={handleChange}
                   />
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      value={age}
-                      name="age"
-                      onChange={handleChange}
-                    />
-                  </>
-                )}
-              </li>
-            </ul>
-            <button type="submit">update account details</button>
+                </>
+              )}
+            </li>
+            <li>
+              Organisation:{" "}
+              {session?.user?.org ? (
+                <input
+                  type="text"
+                  name="org"
+                  value={org}
+                  defaultValue={session?.user?.org}
+                  onChange={handleChange}
+                />
+              ) : (
+                <>
+                  <input
+                    type="text"
+                    value={org}
+                    name="org"
+                    onChange={handleChange}
+                  />
+                </>
+              )}
+            </li>
+            <button className="btn btn-primary mt-4" type="submit">
+              Update account details
+            </button>
           </form>
         </Container>
       </Container>

@@ -53,6 +53,7 @@ export default NextAuth({
             last: user.last,
             email: user.email,
             age: user.age,
+            org: user.org,
           };
         } catch (error: any) {
           throw new Error(error);
@@ -65,8 +66,8 @@ export default NextAuth({
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET
-    })
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
   ],
   session: {
     strategy: "jwt",
