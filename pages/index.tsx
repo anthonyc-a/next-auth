@@ -6,11 +6,7 @@ import { ButtonGroup, Container, Toast } from "react-bootstrap";
 
 const Home = () => {
   const { data: session } = useSession();
-
-  console.log(session?.user);
-
   const router = useRouter();
-
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
 

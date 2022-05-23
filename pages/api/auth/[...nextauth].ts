@@ -6,6 +6,12 @@ import { MongoClient } from "mongodb";
 import clientPromise from "./lib/mongodb";
 import { verifyPassword } from "../../../lib/auth/auth";
 
+type Person = {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+};
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -53,26 +59,20 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
   ],
-  theme: {
-    colorScheme: "light",
-  },
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({ token, user }) {
+    jwt: async ({ token, user }) => {
       user && (token.user = user);
       return token;
     },
-    async session({ session, token, user }) {
-      session.accessToken = token.accessToken;
+    session: async ({ session, token }) => {
+      session.user = token.user as Person;
       return session;
     },
-  },
-  pages: {
-    signIn: "/auth/signin",
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
