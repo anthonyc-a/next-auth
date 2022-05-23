@@ -95,21 +95,19 @@ const SignIn = () => {
               id="exampleInputPassword2"
             />
           </div>
-          <div className="mb-3">
-            <button
-              className="btn btn-secondary"
-              onClick={() => {
-                signIn("google");
-              }}
-            >
-              Sign in with Google
-            </button>
-          </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary w-100 mt-2">
             Sign in
           </button>
         </form>
+          <button
+            className="btn btn-secondary mt-4"
+            onClick={() => {
+              signIn("google");
+            }}
+          >
+            Sign in with Google
+          </button>
       </div>
     </Container>
   );
