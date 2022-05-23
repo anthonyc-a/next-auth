@@ -21,7 +21,7 @@ const SignIn = () => {
 
     if (!session) {
       try {
-        const result : any = await signIn("credentials", {
+        const result: any = await signIn("credentials", {
           redirect: false,
           email: email,
           password: password,
@@ -95,6 +95,17 @@ const SignIn = () => {
               id="exampleInputPassword2"
             />
           </div>
+          <div className="mb-3">
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                signIn("google");
+              }}
+            >
+              Sign in with Google
+            </button>
+          </div>
+
           <button type="submit" className="btn btn-primary">
             Sign in
           </button>
