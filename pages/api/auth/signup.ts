@@ -3,7 +3,7 @@ import { hashPassword } from "../../../lib/auth/auth";
 
 export default async function handler(req: any, res: any) {
   if (req.method === "POST") {
-    const { username, email, password } = req.body;
+    const { first, last, email, password } = req.body;
     if (
       !email ||
       !email.includes("@") ||
@@ -29,7 +29,8 @@ export default async function handler(req: any, res: any) {
     const hashedPassword = await hashPassword(password);
 
     const result = await db.collection("users").insertOne({
-      username: username,
+      first: first,
+      last: last,
       email: email,
       password: hashedPassword,
     });

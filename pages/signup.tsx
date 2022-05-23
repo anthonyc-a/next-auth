@@ -8,14 +8,15 @@ const SignUp = () => {
   const router = useRouter();
 
   const [userCredentials, setUserCredentials] = useState({
-    username: "",
+    first: "",
+    last: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [accepted, setAccepted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { username, email, password, confirmPassword } = userCredentials;
+  const { first, last, email, password, confirmPassword } = userCredentials;
 
   const handleClick = () => setAccepted(!accepted);
 
@@ -36,7 +37,8 @@ const SignUp = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username,
+            first: first,
+            last: last,
             email: email,
             password: password,
           }),
@@ -49,7 +51,8 @@ const SignUp = () => {
         console.log(data.message);
 
         setUserCredentials({
-          username: "",
+          first: "",
+          last: "",
           email: "",
           password: "",
           confirmPassword: "",
@@ -63,7 +66,7 @@ const SignUp = () => {
       }
     else {
       setIsLoading(false);
-      console.log("Accept our privacy policy");
+      console.log("Accept our conditions");
     }
   };
 
@@ -94,17 +97,32 @@ const SignUp = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
-              Name
+              First name
             </label>
             <input
               type="text"
-              placeholder="Name"
-              value={username}
-              name="username"
+              placeholder="First name"
+              value={first}
+              name="first"
               onChange={handleChange}
               required
               className="form-control"
               id="exampleInputUser1"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Last name
+            </label>
+            <input
+              type="text"
+              placeholder="Last name"
+              value={last}
+              name="last"
+              onChange={handleChange}
+              required
+              className="form-control"
+              id="exampleInputUser2"
             />
           </div>
           <div className="mb-3">

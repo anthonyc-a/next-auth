@@ -1,13 +1,16 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { MongoClient } from "mongodb";
 import clientPromise from "./lib/mongodb";
 import { verifyPassword } from "../../../lib/auth/auth";
 
-type Person = {
+type User = {
   name?: string | null;
+  first?: string | null;
+  last?: string | null;
   email?: string | null;
   image?: string | null;
 };
@@ -46,8 +49,10 @@ export default NextAuth({
           client.close();
 
           return {
-            name: user.username,
+            first: user.first,
+            last: user.last,
             email: user.email,
+            age: user.age,
           };
         } catch (error: any) {
           throw new Error(error);
@@ -58,6 +63,10 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET
+    })
   ],
   session: {
     strategy: "jwt",
@@ -70,7 +79,7 @@ export default NextAuth({
       return token;
     },
     session: async ({ session, token }) => {
-      session.user = token.user as Person;
+      session.user = token.user as User;
       return session;
     },
   },
