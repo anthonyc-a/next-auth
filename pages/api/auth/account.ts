@@ -47,7 +47,6 @@ export default async function handler(req: any, res: any) {
         }
       ));
 
-    console.log(firstName);
     res.status(201).json({ message: "Field added!" });
   }
 }

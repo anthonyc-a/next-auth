@@ -32,8 +32,6 @@ const Account = () => {
     org: session?.user?.org!,
   });
 
-  console.log(userCredentials);
-
   const { first, last, age, org } = userCredentials;
 
   const handleSubmit = async (e: any) => {

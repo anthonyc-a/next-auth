@@ -7,8 +7,35 @@ import { ButtonGroup, Container, Toast } from "react-bootstrap";
 const Home = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  console.log(searchValue);
+
   const [showA, setShowA] = useState(true);
   const toggleShowA = () => setShowA(!showA);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          value: searchValue,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Something went wrong");
+      console.log(data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Container className="d-flex flex-column align-items-center p-4 vh-100">
@@ -51,6 +78,7 @@ const Home = () => {
           className="me-2 rounded"
           onClick={(e) => {
             e.preventDefault();
+            setShowSearch(!showSearch);
           }}
         >
           Search
@@ -129,6 +157,26 @@ const Home = () => {
           {session?.user?.name ? session?.user?.name! : session?.user?.first!}
         </h1>
       </div>
+
+      {showSearch && (
+        <div className="search">
+          <div
+            className="overlay"
+            onClick={() => {
+              setShowSearch(false);
+            }}
+          ></div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Search users"
+            />
+            <button type="submit">search</button>
+          </form>
+        </div>
+      )}
     </Container>
   );
 };
