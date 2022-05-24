@@ -47,6 +47,15 @@ const Home = () => {
           </Button>
         )}
 
+        <Button
+          className="me-2 rounded"
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          Search
+        </Button>
+
         {!session && (
           <Button
             className="me-2 rounded"
