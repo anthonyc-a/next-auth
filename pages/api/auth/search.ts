@@ -7,7 +7,7 @@ export default async function handler(req: any, res: any) {
     const client = await MongoClient.connect(process.env.MONGODB_URI!);
     const db = client.db();
 
-    const searchUsers = db.collection("users").find();
+    const searchUsers = await db.collection("users").find({ name: value });
 
     if (!searchUsers) {
       res.status(201).json({ message: "User not found" });
